@@ -1,0 +1,198 @@
+/***************/
+/*    login    */
+/***************/
+.div_container_top{
+    width:100%;
+    padding-top: 30px;
+}
+.div_container_top_center{
+    width:310px;
+    height:150px;
+    margin:0 auto;
+}
+.div_logo{
+    width:53px;
+    height:53px;
+    margin:0 auto;
+
+}
+.div_word{
+    width:310;
+    margin:0 auto;
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: -0.5px;
+    text-align:center;
+}
+.div_container_main{
+    width:100%;
+
+}
+.div_container_main_center{
+    width:310px;
+    height:235px;
+    margin:0 auto;
+    background-color:#FFF;
+    border: 1px solid #d8dee2;
+    border-radius: 5px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.div_main_first{
+    width:100%;
+    height:20px;
+
+}
+.div_first_word{
+    font-size: 13px;
+    color:#505050;
+    font-weight:600;
+    float:left;
+    margin-bottom: 7px;
+}
+.div_main_second{
+    width:100%;
+    height:40px;
+
+}
+
+.div_main_third{
+    width:100%;
+    height:20px;
+    margin-top:10px;
+
+}
+.div_chat_top_word1{
+    font-size: 13px;
+    font-weight:600;
+    float:left;
+    margin-bottom: 7px;
+    color: #505050;
+}
+.div_main_fouth{
+    width:100%;
+    height:40px;
+
+}
+.search{
+    height:20px;
+    float:right;
+    margin:0 auto;
+}
+.div_main_fifth{
+    width:100%;
+    height:40px;
+
+}
+.div_fifth_button{
+    display: inline-block;
+    text-decoration-line: none;
+    margin-top:22px;
+    padding:8px 12px;
+    font-size:14px;
+    font-weight:600;
+    line-height:20px;
+    border:2px solid #186384;
+    width:268px;
+    color:white;
+    background-color:#186384;
+    border-radius: 0.25em;
+    text-align:center;
+    transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+}
+.div_fifth_button:hover{
+    background-color: #fff;
+    color: #186384;
+    cursor: pointer;
+}
+.div_foot{
+    margin-top:20px;
+    width:100%;
+    height:100px;
+
+}
+.div_foot_main{
+    width:310px;
+    height:80px;
+    margin:0 auto;
+    background-color:#F9F9F9;
+
+}
+.div_sixth{
+    width:300px;
+    height:40px;
+    background-color:#F9F9F9;
+    color:#0366D6;
+    border:1px solid #D8DEE2;
+    border-radius: 0.25em;
+    text-align:center;
+    padding: 5px;
+}
+.div_sixth_word1{
+    width:150px;
+    text-align:center;
+    margin:0 auto;
+    color:#D8DEE2;
+    float:left;
+    margin-top:10px;
+}
+.div_sixth_word2{
+
+    width:150px;
+    text-align:center;
+    margin:0 auto;
+    color:#0366d6;
+    float:right;
+    margin-top:10px;
+
+}
+#username,#password{
+    width:255px;
+    height:30px;
+    border:1px #d1d5da solid;
+    border-radius:3px;
+    padding: 1px 6px;
+    font-size: 14px;
+}
+.full-left{
+    float: left;
+}
+.flash-error{
+    margin: 0 auto;
+    width: 268px;
+    background-color: #ffdce0;
+    color: #86181d;
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(27,31,35,.15);
+}
+.error-text{
+    font-size: 11px;
+}
+.error-close-btn{
+    float: right;
+    background-color: transparent;
+    border: 0;
+}
+.error-close-btn:hover{
+    cursor: pointer;
+}
+.close {
+    color: #86181d;
+    line-height: 20px;
+    text-align: center;
+    font-size: 14px;
+    padding: 1px;
+    top: -10px;
+    right: -10px;
+}
+.close::before {
+    content: "\2716";
+}
+/***************/
+/*     end     */
+/***************/

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hg.seckill.dao.SeckillGoodsMapper">
+    <resultMap id="BaseResultMap" type="com.hg.seckill.model.SeckillGoods">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="seckill_price" property="seckillPrice" jdbcType="DECIMAL"/>
+        <result column="stock_count" property="stockCount" jdbcType="INTEGER"/>
+        <result column="start_date" property="startDate" jdbcType="TIMESTAMP"/>
+        <result column="end_date" property="endDate" jdbcType="TIMESTAMP"/>
+        <result column="md5" property="md5" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="ResultMap" type="com.hg.seckill.model.SeckillGoods" extends="BaseResultMap">
+        <association property="goods" javaType="com.hg.seckill.model.Goods">
+            <id column="goods_id" property="id"/>
+            <result column="goods_name" property="goodsName"/>
+            <result column="goods_title" property="goodsTitle"/>
+            <result column="goods_img" property="goodsImg"/>
+            <result column="goods_price" property="goodsPrice"/>
+            <result column="goods_stock" property="goodsStock"/>
+            <result column="goods_detail" property="goodsDetail"/>
+        </association>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, goods_id, seckill_price, stock_count, start_date, end_date, version
+    </sql>
+    <sql id="Column_List">
+        sk_goods_seckill.id,
+        sk_goods_seckill.seckill_price,
+        sk_goods_seckill.stock_count,
+        sk_goods_seckill.start_date,
+        sk_goods_seckill.end_date,
+        sk_goods_seckill.md5,
+        sk_goods_seckill.version,
+        sk_goods.id goods_id,
+        sk_goods.goods_name goods_name,
+        sk_goods.goods_title goods_title,
+        sk_goods.goods_img goods_img,
+        sk_goods.goods_price goods_price,
+        sk_goods.goods_stock goods_stock,
+        sk_goods.goods_detail goods_detail
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Column_List"/>
+        from sk_goods_seckill join sk_goods
+        on sk_goods_seckill.goods_id = sk_goods.id
+        where sk_goods_seckill.id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sk_goods_seckill
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.hg.seckill.model.SeckillGoods">
+        insert into sk_goods_seckill (id, goods_id, seckill_price,
+                                      stock_count, start_date, end_date,
+                                      version)
+        values (#{id,jdbcType=BIGINT}, #{goodsId,jdbcType=BIGINT}, #{seckillPrice,jdbcType=DECIMAL},
+                #{stockCount,jdbcType=INTEGER}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP},
+                #{version,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.hg.seckill.model.SeckillGoods">
+        insert into sk_goods_seckill
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="seckillPrice != null">
+                seckill_price,
+            </if>
+            <if test="stockCount != null">
+                stock_count,
+            </if>
+            <if test="startDate != null">
+                start_date,
+            </if>
+            <if test="endDate != null">
+                end_date,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=BIGINT},
+            </if>
+            <if test="seckillPrice != null">
+                #{seckillPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="stockCount != null">
+                #{stockCount,jdbcType=INTEGER},
+            </if>
+            <if test="startDate != null">
+                #{startDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endDate != null">
+                #{endDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hg.seckill.model.SeckillGoods">
+        update sk_goods_seckill
+        <set>
+            <if test="goods != null">
+                goods_id = #{goods.id,jdbcType=BIGINT},
+            </if>
+            <if test="seckillPrice != null">
+                seckill_price = #{seckillPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="stockCount != null">
+                stock_count = #{stockCount,jdbcType=INTEGER},
+            </if>
+            <if test="startDate != null">
+                start_date = #{startDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endDate != null">
+                end_date = #{endDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="version != null">
+                version = #{version,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hg.seckill.model.SeckillGoods">
+        update sk_goods_seckill
+        set goods_id      = #{goodsId,jdbcType=BIGINT},
+            seckill_price = #{seckillPrice,jdbcType=DECIMAL},
+            stock_count   = #{stockCount,jdbcType=INTEGER},
+            start_date    = #{startDate,jdbcType=TIMESTAMP},
+            end_date      = #{endDate,jdbcType=TIMESTAMP},
+            version       = #{version,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectAll" resultMap="ResultMap">
+        select
+        <include refid="Column_List"/>
+        from
+        sk_goods_seckill join sk_goods
+        on sk_goods_seckill.goods_id = sk_goods.id
+    </select>
+
+    <select id="getVersionByGoodsId" resultType="java.lang.Integer">
+        select
+            version
+        from sk_goods_seckill
+            where goods_id=#{id}
+        limit 1
+    </select>
+
+    <update id="reduceStock" parameterType="com.hg.seckill.model.SeckillGoods">
+        update sk_goods_seckill
+        set stock_count = stock_count - 1,
+            version = version + 1
+        where goods_id = #{goods.id} and stock_count > 0 and version = #{version}
+    </update>
+</mapper>
