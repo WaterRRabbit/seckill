@@ -22,4 +22,6 @@ public interface SeckillGoodsMapper {
     Integer getVersionByGoodsId(Long id);
 
     int reduceStock(SeckillGoods seckillGoods);
+
+    SeckillGoods selectByGoodsId(Long goodsId);
 }

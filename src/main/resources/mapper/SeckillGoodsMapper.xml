@@ -166,4 +166,13 @@
             version = version + 1
         where goods_id = #{goods.id} and stock_count > 0 and version = #{version}
     </update>
+
+    <select id="selectByGoodsId" parameterType="java.lang.Long" resultMap="ResultMap">
+        select
+        <include refid="Column_List"/>
+        from
+        sk_goods_seckill join sk_goods
+        on sk_goods_seckill.goods_id = sk_goods.id
+        where sk_goods_seckill.goods_id = #{goodsId}
+    </select>
 </mapper>

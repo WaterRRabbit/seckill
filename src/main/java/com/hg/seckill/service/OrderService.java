@@ -29,9 +29,9 @@ public class OrderService {
     }
 
     @Transactional
-    public OrderInfo createOrder(User user, SeckillGoods seckillGoods) {
+    public OrderInfo createOrder(Long userId, SeckillGoods seckillGoods) {
         OrderInfo orderInfo = new OrderInfo();
-        orderInfo.setUserId(user.getId());
+        orderInfo.setUserId(userId);
         orderInfo.setDeliveryAddrId(0L);
         orderInfo.setGoodsCount(1);
         orderInfo.setGoodsId(seckillGoods.getGoods().getId());
@@ -39,12 +39,12 @@ public class OrderService {
         orderInfo.setGoodsPrice(seckillGoods.getSeckillPrice());
         orderInfo.setOrderChannel((byte) 1);
         orderInfo.setStatus((byte) 0);
-        orderInfo.setUserId(user.getId());
+        orderInfo.setUserId(userId);
         orderInfo.setCreateDate(new Date());
         orderInfoMapper.insertSelective(orderInfo);
 
         SeckillOrder seckillOrder = new SeckillOrder();
-        seckillOrder.setUserId(user.getId());
+        seckillOrder.setUserId(userId);
         seckillOrder.setOrderId(orderInfo.getId());
         seckillOrder.setGoodsId(seckillGoods.getGoods().getId());
         seckillOrderMapper.insertSelective(seckillOrder);

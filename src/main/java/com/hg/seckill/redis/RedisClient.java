@@ -41,6 +41,81 @@ public class RedisClient {
         return bytes;
     }
 
+    /**
+     * 删除key
+     *
+     * @param key
+     * @return
+     */
+    public boolean delete(byte[] key) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            long ret = jedis.del(key);
+            return ret > 0;
+        } finally {
+            returnJedis(jedis);
+        }
+    }
+
+    /**
+     * 判断key是否存在
+     *
+     * @param key
+     * @return
+     */
+    public boolean exists(byte[] key) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            return jedis.exists(key);
+        } finally {
+            returnJedis(jedis);
+        }
+    }
+
+    /**
+     * 自增一
+     *
+     * @param key
+     * @return
+     */
+    public Long incr(byte[] key) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            return jedis.incr(key);
+        } finally {
+            returnJedis(jedis);
+        }
+    }
+
+    /**
+     * 自减一
+     *
+     * @param key
+     * @return
+     */
+    public Long decr(byte[] key) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            return jedis.decr(key);
+        } finally {
+            returnJedis(jedis);
+        }
+    }
+
+    public Long setnx(byte[] key) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            return jedis.setnx(key, "tmp".getBytes());
+        } finally {
+            returnJedis(jedis);
+        }
+    }
+
     private void returnJedis(Jedis jedis) {
         if (jedis != null) {
             jedis.close();

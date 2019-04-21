@@ -1,6 +1,5 @@
 package com.hg.seckill.rabbitmq;
 
-import com.hg.seckill.model.SeckillOrder;
 import com.hg.seckill.util.SerializerUtil;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +14,9 @@ public class RabbitSender {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    public void send(SeckillOrder seckillOrder) {
+    public void send(SeckillMessage seckillMessage) {
 
         rabbitTemplate.convertAndSend("seckill",
-                SerializerUtil.serializer(seckillOrder));
+                SerializerUtil.serializer(seckillMessage));
     }
 }

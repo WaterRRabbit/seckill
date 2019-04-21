@@ -6,11 +6,15 @@ package com.hg.seckill.result;
  */
 public enum CodeMessageEnum {
     SUCCESS(0, "success"),
+    SECKILL_WAIT(2001, "排队中"),
+
     SERVER_ERROR(5000, "服务端异常"),
     ACCESS_LIMIT_REACHED(5001, "访问高峰期"),
 
     SECKILL_REPEATE(5002, "重复秒杀"),
-    SECKILL_OVER(5003, "秒杀结束");
+    SECKILL_OVER(5003, "秒杀结束"),
+
+    NOT_LOGIN(5004, "未登录");
 
     private int code;
     private String message;

@@ -38,4 +38,9 @@ public class SeckillGoodsMapperTest {
         SeckillGoods goods = seckillGoodsMapper.selectByPrimaryKey(100000L);
         seckillGoodsMapper.reduceStock(goods);
     }
+
+    @Test
+    public void selectByGoodsId() {
+        System.out.println(JSON.toJSONString(seckillGoodsMapper.selectByGoodsId(100000L)));
+    }
 }

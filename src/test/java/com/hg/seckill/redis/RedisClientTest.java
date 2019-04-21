@@ -18,11 +18,34 @@ public class RedisClientTest {
 
     @Test
     public void set() {
-        redisClient.set("key".getBytes(), "jedis".getBytes(), 200);
+        redisClient.set((RedisKeysPrefix.STOCK+100000L).getBytes(), "6".getBytes(),-1);
     }
 
     @Test
     public void get() {
         System.out.println(new String(redisClient.get("key".getBytes())));
+    }
+
+    @Test
+    public void delete() {
+    }
+
+    @Test
+    public void exists() {
+    }
+
+    @Test
+    public void incr() {
+        System.out.println(redisClient.incr((RedisKeysPrefix.STOCK+100000L).getBytes()));
+    }
+
+    @Test
+    public void decr() {
+        System.out.println(redisClient.decr((RedisKeysPrefix.STOCK+100000L).getBytes()));
+    }
+
+    @Test
+    public void setnx() {
+        System.out.println(redisClient.setnx("exists".getBytes()));
     }
 }
