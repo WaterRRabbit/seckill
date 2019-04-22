@@ -45,6 +45,7 @@ public class RabbitReceiver {
             redisClient.setnx((RedisKeysPrefix.IS_OVER + message.getGoodsId()).getBytes());
             return;
         }
+        //判断重复秒杀
         SeckillOrder order = seckillOrderMapper.selectByUserIdGoodsId(
                 message.getUserId(), message.getGoodsId());
         if (order != null)

@@ -25,9 +25,8 @@ public class SeckillGoodsService {
         return seckillGoodsMapper.selectByPrimaryKey(id);
     }
 
-    public boolean isOver(Long goodsId) {
-
-        return false;
+    public SeckillGoods selectByGoodsId(Long goodsId){
+        return seckillGoodsMapper.selectByGoodsId(goodsId);
     }
 
     /**

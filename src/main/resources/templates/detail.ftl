@@ -11,6 +11,17 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery.countdown/2.2.0/jquery.countdown.min.js"></script>
     <script src="/js/seckill.js"></script>
+    <style>
+        .pr{
+            display: inline-block;
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+            padding: .375rem .75rem;
+            border-radius: .25rem;
+            vertical-align: middle;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -22,17 +33,16 @@
             <p class="card-text">${seckillGoods.goods.goodsDetail}</p>
             <p>原价:${seckillGoods.goods.goodsPrice}</p>
             <p>秒杀价:${seckillGoods.seckillPrice}</p>
-            <span class="btn btn-primary" id="countdown"></span>
-            <script>
-                var countdown = $('#countdown');
-                var killTime = '${seckillGoods.startDate?datetime}';
-                countdown.countdown(killTime, function (event) {
-                    var format = event.strftime('%D天 %H:%M:%S');
-                    countdown.html(format);
-                });
-            </script>
+            <span id="countdown"></span>
         </div>
     </div>
+    <script>
+        seckill.init({
+            startTime : new Date('${seckillGoods.startDate?datetime}'),
+            endTime : new Date('${seckillGoods.endDate?datetime}'),
+            goodsId : ${seckillGoods.goods.id?c}
+        });
+    </script>
 
 </div>
 </body>

@@ -8,10 +8,12 @@ import com.hg.seckill.rabbitmq.SeckillMessage;
 import com.hg.seckill.redis.RedisClient;
 import com.hg.seckill.redis.RedisKeysPrefix;
 import com.hg.seckill.result.CodeMessageEnum;
+import com.hg.seckill.result.Expose;
 import com.hg.seckill.result.Result;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * Created by YE
@@ -60,12 +62,29 @@ public class SeckillService {
 
     public void execute(Long userId, SeckillGoods seckillGoods) {
         boolean success = seckillGoodsService.reduceStock(seckillGoods);
-        if (success){
+        if (success) {
             orderService.createOrder(userId, seckillGoods);
-        }else{
+        } else {
             //减库存失败
             redisClient.setnx((RedisKeysPrefix.IS_OVER +
                     seckillGoods.getGoods().getId()).getBytes());
         }
+    }
+
+    public Expose expose(Long goodsId) {
+        SeckillGoods seckillGoods = seckillGoodsService.selectByGoodsId(goodsId);
+        Expose exp = new Expose();
+        exp.setGoodsId(goodsId);
+        exp.setStartTime(seckillGoods.getStartDate());
+        exp.setEndTime(seckillGoods.getEndDate());
+        Date now = new Date();
+        exp.setNowTime(now);
+        if (now.getTime()<seckillGoods.getStartDate().getTime()
+                || now.getTime() > seckillGoods.getEndDate().getTime()) {
+            exp.setStart(false);
+        }else{
+            exp.setStart(true);
+        }
+        return exp;
     }
 }
