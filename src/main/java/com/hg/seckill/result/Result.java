@@ -13,22 +13,22 @@ public class Result<T> {
 
     private T data;
 
-    private String msg;
+    private String message;
 
 
     public Result(CodeMessageEnum codeMessageEnum){
         code = codeMessageEnum.getCode();
-        msg = codeMessageEnum.getMessage();
+        message = codeMessageEnum.getMessage();
     }
 
     public Result(T data){
         code = CodeMessageEnum.SUCCESS.getCode();
-        msg = CodeMessageEnum.SUCCESS.getMessage();
+        message = CodeMessageEnum.SUCCESS.getMessage();
         this.data = data;
     }
 
-    public Result(int code, String msg){
+    public Result(int code, String message){
         this.code = code;
-        this.msg = msg;
+        this.message = message;
     }
 }

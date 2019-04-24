@@ -5,6 +5,12 @@ var seckill = {
         },
         now: function () {
             return '/seckill/now';
+        },
+        execution: function (id) {
+            return '/seckill/' + id + '/execution';
+        },
+        result: function (id) {
+            return '/seckill/' + id + '/result';
         }
     },
     handleSeckill: function (goodsId, node) {
@@ -16,7 +22,38 @@ var seckill = {
                 if (expose['start']) {
                     $('#kill-btn').one('click', function () {
                         $(this).addClass('disabled');
-
+                        $.get(seckill.URL.execution(goodsId), {}, function (res) {
+                            if (res) {
+                                if (res['code'] === 5002 || res['code'] === 5003) {
+                                    node.addClass('pr');
+                                    node.html(res['message']);
+                                } else if (res['code'] === 2001) {
+                                    node.addClass('pr');
+                                    node.html(res['message']);
+                                    var req = {
+                                        url: seckill.URL.result(goodsId),
+                                        data: {},
+                                        success: function (res) {
+                                            if (res) {
+                                                if (res['code'] === 2001) {
+                                                    node.addClass('pr');
+                                                    node.html(res['message']);
+                                                    seckill.getResult(req);
+                                                } else if (res['code'] === 5002 || res['code'] === 5003) {
+                                                    node.addClass('pr');
+                                                    node.html(res['message']);
+                                                } else if (res['code'] === 0){
+                                                    //秒杀成功
+                                                    node.addClass('pr');
+                                                    node.html(res['message']);
+                                                }
+                                            }
+                                        }
+                                    };
+                                    seckill.getResult(req);
+                                }
+                            }
+                        });
                     });
                 } else {
                     seckill.countdown(goodsId, expose['startTime'],
@@ -59,5 +96,8 @@ var seckill = {
 
             }
         });
+    },
+    getResult: function (params) {
+        $.get(params['url'], params['data'], params['success']);
     }
 };
